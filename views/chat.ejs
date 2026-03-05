@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Discourse Chat</title>
+
+<link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<div class="chat-header">
+<span class="logo"> <%= name %> chatting </span>
+</div>
+
+<div class="chat-messages"></div>
+
+<form id="form" class="chat-input">
+
+<div class="plus">+</div>
+
+<input id="input" autocomplete="off" placeholder="Chat with Omar Lind">
+
+<button type="submit">➤</button>
+
+</form>
+
+</div>
+<script>
+let username = "<%= name %>"
+</script>
+<script src="/socket.io/socket.io.js"></script>
+
+
+<script>
+let socket = io()
+
+let form = document.getElementById("form")
+let input = document.getElementById("input")
+let messages = document.getElementsByClassName("chat-messages")[0]
+
+form.addEventListener("submit",(e)=>{
+e.preventDefault()
+
+if(input.value){
+
+socket.emit("new msg from qais",{
+mess:input.value,
+id:socket.id,
+name:username
+})
+
+input.value=""
+}
+})
+
+socket.on("new msg from qais",(data)=>{
+
+let row = document.createElement("div")
+row.className="msg-row"
+
+let bubble = document.createElement("div")
+
+if(data.id==socket.id){
+
+row.classList.add("right-row")
+bubble.className="message right"
+
+bubble.innerHTML = data.mess
+
+}else{
+
+let avatar=document.createElement("div")
+avatar.className="avatar"
+avatar.textContent=data.name[0]
+
+row.appendChild(avatar)
+
+bubble.className="message-h left"
+/*
+bubble.innerHTML =
+"<b style='font-weight:bold;'>user :</b> " +
+"<span style='font-size:12px;font-weight:bold;color:#4da6ff;margin-bottom:3px;'>" +
+data.name +
+"</span><br>" +
+data.mess
+} */
+bubble.innerHTML = 
+"<div style='background:#2b2b2b;color:#00b894;font-weight:bold;padding:1.5px 8px;border-radius:6px 6px 0 0;font-size:12px'>" 
+    + "<b style='font-weight:bold;color:white;;'>user :</b> " +
+data.name +
+"</div>" +
+
+"<div style='background:#1e1e1e;color:#eee;padding:6px 8px;border-radius:0 0 6px 6px;font-size:14px'>" +
+data.mess +
+"</div>"
+}
+
+
+
+row.appendChild(bubble)
+
+messages.appendChild(row)
+
+messages.scrollTop=messages.scrollHeight
+
+})
+</script>
+
+
+</body>
+</html>

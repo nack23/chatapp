@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chat Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0f172a;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.dashboard{
+text-align:center;
+}
+
+.card{
+background:#1e293b;
+padding:40px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+input{
+padding:12px;
+width:250px;
+border:none;
+border-radius:6px;
+margin-top:20px;
+}
+
+button{
+padding:12px 20px;
+background:#3b82f6;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-left:10px;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<div class="card">
+
+<h2>Join Group Chat</h2>
+
+<input 
+type="text" 
+id="username" 
+placeholder="Enter your name"
+/>
+
+<button onclick="joinChat()">Join</button>
+
+</div>
+
+</div>
+
+<script>
+
+function joinChat(){
+
+let name = document.getElementById("username").value
+
+if(name === ""){
+alert("Please enter your name")
+return
+}
+
+window.location = "/chat/" + name
+
+}
+
+</script>
+
+</body>
+</html>
