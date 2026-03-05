@@ -2,22 +2,26 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
 }
 
+/* body */
+
 body{
-height:100vh;
+min-height:100vh;
 background:#0d1117;
 display:flex;
 justify-content:center;
 align-items:center;
+padding:10px;
 }
 
 /* container */
 
 .chat-container{
-width:380px;
-height:90vh;
+width:100%;
+max-width:420px;
+height:100vh;
 background:#0f1720;
 display:flex;
 flex-direction:column;
@@ -33,9 +37,10 @@ color:white;
 padding:14px;
 font-size:18px;
 font-weight:bold;
+text-align:center;
 }
 
-/* messages */
+/* messages area */
 
 .chat-messages{
 flex:1;
@@ -49,7 +54,7 @@ background:#0f1720;
 background-image:url("https://www.transparenttextures.com/patterns/circuit-board.png");
 }
 
-/* row */
+/* message row */
 
 .msg-row{
 display:flex;
@@ -85,8 +90,8 @@ font-size:14px;
 line-height:1.4;
 position:relative;
 }
-.message-h{
 
+.message-h{
 border-radius:8px;
 max-width:70%;
 font-size:14px;
@@ -108,17 +113,11 @@ background:#2f7d69;
 color:white;
 }
 
-/* time */
-
-.time{
-font-size:10px;
-color:#bbb;
-margin-left:6px;
-}
-
-/* input */
+/* input section */
 
 .chat-input{
+position:sticky;
+bottom:0;
 display:flex;
 align-items:center;
 padding:10px;
@@ -126,6 +125,8 @@ background:#111;
 gap:10px;
 border-top:1px solid #333;
 }
+
+/* plus button */
 
 .plus{
 width:28px;
@@ -136,7 +137,10 @@ display:flex;
 align-items:center;
 justify-content:center;
 color:white;
+cursor:pointer;
 }
+
+/* input */
 
 .chat-input input{
 flex:1;
@@ -146,7 +150,10 @@ border:none;
 outline:none;
 background:#1e1e1e;
 color:white;
+font-size:14px;
 }
+
+/* send button */
 
 .chat-input button{
 border:none;
@@ -155,4 +162,45 @@ color:white;
 padding:8px 12px;
 border-radius:50%;
 cursor:pointer;
+}
+
+/* mobile responsive */
+
+@media (max-width:600px){
+
+body{
+padding:0;
+align-items:stretch;
+}
+
+.chat-container{
+width:100%;
+height:100vh;
+border-radius:0;
+}
+
+.chat-header{
+font-size:16px;
+padding:12px;
+}
+
+.chat-messages{
+padding:10px;
+}
+
+.message,
+.message-h{
+max-width:85%;
+font-size:13px;
+}
+
+.chat-input{
+padding:8px;
+gap:6px;
+}
+
+.chat-input input{
+font-size:14px;
+}
+
 }
